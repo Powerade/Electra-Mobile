@@ -1,6 +1,10 @@
 import { AppRegistry } from 'react-native'
-import { TabNavigator } from 'react-navigation'
+import { StackNavigator, TabNavigator } from 'react-navigation'
 
+import QRCodeScanner from './components/QRCodeScanner/QRCodeScanner'
+import CreateWalletScreen from './screens/createWallet/CreateWalletScreen'
+import ImportWalletScreen from './screens/importWallet/ImportWalletScreen'
+import LoginScreen from './screens/login/LoginScreen'
 import ReceiveScreen from './screens/receive/ReceiveScreen'
 import SendScreen from './screens/send/SendScreen'
 import SettingsScreen from './screens/settings/SettingsScreen'
@@ -12,8 +16,24 @@ const tabNavigator = TabNavigator(
     Receive: { screen: ReceiveScreen },
     Send: { screen: SendScreen },
     Settings: { screen: SettingsScreen }
-  },
-  { tabBarPosition: 'bottom' }
+  }
 )
 
-AppRegistry.registerComponent('electramobile', () => tabNavigator)
+const RootNavigator = StackNavigator({
+  QRCodeScanner: {
+    screen: QRCodeScanner
+  },
+  ImportWallet: {
+    screen: ImportWalletScreen
+  },
+  CreateWallet: {
+    screen: CreateWalletScreen
+  },
+  Login: {
+    screen: LoginScreen
+  }
+},
+  { headerMode: 'none' }
+)
+
+AppRegistry.registerComponent('electramobile', () => QRCodeScanner)

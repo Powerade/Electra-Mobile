@@ -1,15 +1,10 @@
 import ElectraJs, { CoinMarketCapCurrency } from 'electra-js'
 import numeral from 'numeral'
 import React from 'react'
-import { StatusBar, StyleSheet, Text, View } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
+import { StyleSheet, Text } from 'react-native'
+import MainWrapper from '../../components/MainWrapper/MainWrapper'
 
 const styles = StyleSheet.create({
-  background: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center'
-  },
   balanceInEca: {
     color: 'rgba(255, 255, 255, 1)',
     fontSize: 36,
@@ -24,9 +19,6 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, .6)',
     fontSize: 18,
     fontWeight: '500'
-  },
-  container: {
-    flex: 1
   }
 })
 
@@ -60,35 +52,24 @@ export default class WalletScreen extends React.Component<{}, State> {
 
   public render(): JSX.Element {
     return (
-      <View style={styles.container}>
-        <StatusBar
-          backgroundColor='#590c76'
-          barStyle='light-content'
-        />
-        <LinearGradient
-          colors={['#9619b3', '#6f1294']}
-          end={{ x: 1, y: 0 }}
-          start={{ x: 0, y: 0 }}
-          style={styles.background}
-        >
-          <Text style={styles.balanceLabel}>
-            YOUR TOTAL BALANCE
+      <MainWrapper>
+        <Text style={styles.balanceLabel}>
+          YOUR TOTAL BALANCE
           </Text>
-          <Text style={styles.balanceInEca}>
-            {this.state.balance === 0
-              ? '...'
-              : numeral(this.state.balance).format('0,0.000')
-            } ECA
+        <Text style={styles.balanceInEca}>
+          {this.state.balance === 0
+            ? '...'
+            : numeral(this.state.balance).format('0,0.000')
+          } ECA
           </Text>
-          <Text style={styles.balanceInFiat}>
-            {this.state.currentPrice === 0
-              ? '...'
-              : numeral(this.state.balance * this.state.currentPrice).format('0,0.00')
-            }
-            {this.state.currency}
-          </Text>
-        </LinearGradient>
-      </View>
+        <Text style={styles.balanceInFiat}>
+          {this.state.currentPrice === 0
+            ? '...'
+            : numeral(this.state.balance * this.state.currentPrice).format('0,0.00')
+          }
+          {this.state.currency}
+        </Text>
+      </MainWrapper>
     )
   }
 }
