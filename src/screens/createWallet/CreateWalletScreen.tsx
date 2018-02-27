@@ -2,6 +2,8 @@ import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 import MainWrapper from '../../components/MainWrapper/MainWrapper'
 
+import CryptoJS from 'crypto-js';
+
 const styles = StyleSheet.create({
     button: {
         backgroundColor: '#0E3CA5',
@@ -24,6 +26,18 @@ const styles = StyleSheet.create({
 })
 
 export default class CreateWalletScreen extends React.Component {
+    public constructor(props) {
+        super(props)
+        var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
+        console.log(ciphertext)
+
+        // Decrypt 
+        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+
+        console.log(plaintext);
+    }
+
     public render(): JSX.Element {
         return (
             <MainWrapper>

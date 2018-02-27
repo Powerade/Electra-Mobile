@@ -28,7 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new RNCameraPackage(),
+            new RNCameraPackage()
       );
     }
 

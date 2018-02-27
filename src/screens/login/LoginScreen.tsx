@@ -45,7 +45,13 @@ export default class LoginScreen extends React.Component {
                     style={styles.button}
                     onPress={this.createWallet}
                 >
-                    <Text style={styles.buttonText}>Create new Wallet</Text>
+                    <Text style={styles.buttonText}>Create New Wallet</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.createWallet}
+                >
+                    <Text style={styles.buttonText}>Recover Wallet</Text>
                 </TouchableOpacity>
             </MainWrapper>
         )
