@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation'
 import QRCodeScanner from './components/QRCodeScanner/QRCodeScanner'
 import CreateWalletScreen from './screens/createWallet/CreateWalletScreen'
 import ImportWalletScreen from './screens/importWallet/ImportWalletScreen'
+import LocalEncryptionScreen from './screens/localEncryption/LocalEncryptionScreen'
 import LoginScreen from './screens/login/LoginScreen'
 import RecoverWalletScreen from './screens/recoverWallet/RecoverWalletScreen'
 // import ReceiveScreen from './screens/receive/ReceiveScreen'
@@ -35,6 +36,9 @@ const RootNavigator = StackNavigator({
   },
   RecoverWallet: {
     screen: RecoverWalletScreen
+  },
+  LocalEncryption: {
+    screen: LocalEncryptionScreen
   }
 },
   { headerMode: 'none' }
