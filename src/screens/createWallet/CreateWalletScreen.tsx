@@ -1,48 +1,72 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import MainWrapper from '../../components/MainWrapper/MainWrapper'
 
-import CryptoJS from 'crypto-js';
+import CryptoJS from 'crypto-js'
+import Prompt from 'rn-prompt'
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: '#0E3CA5',
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#430366',
-        width: '75%',
-        height: '7%',
-        marginVertical: 10,
+    container: {
+        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginHorizontal: 20
     },
-    buttonText: {
-        color: '#fff',
+    mnemonic: {
         textAlign: 'center',
-        paddingLeft: 10,
-        paddingRight: 10,
-        fontSize: 20
+        color: 'white',
+        fontSize: 18
+    },
+    warning: {
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 14
     }
 })
 
-export default class CreateWalletScreen extends React.Component {
-    public constructor(props) {
+export interface State {
+    mnemonic: string,
+    promptVisible: boolean
+}
+
+export default class CreateWalletScreen extends React.Component<{}, State> {
+    private hashMnemonic = (mnemonic: string): string =>
+        CryptoJS.SHA256(mnemonic).toString(CryptoJS.enc.Hex)
+
+    public constructor(props: object) {
         super(props)
-        var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
-        console.log(ciphertext)
+        this.state = {
+            promptVisible: true,
+            mnemonic: ''
+        }
+    }
 
-        // Decrypt 
-        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
-        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-
-        console.log(plaintext);
+    private submitMnemonic = (value: string) => {
+        this.setState({
+            promptVisible: false,
+            mnemonic: value
+        })
     }
 
     public render(): JSX.Element {
         return (
             <MainWrapper>
-                <Text>This is your mnemonic</Text>
-                <Text>Mnemonic here</Text>
+                <Prompt
+                    title='Input a mnemonic'
+                    placeholder='Type here..'
+                    visible={this.state.promptVisible}
+                    onCancel={null}
+                    onSubmit={this.submitMnemonic}
+                />
+                {!!this.state.mnemonic &&
+                    <View style={styles.container}>
+                        <Text style={styles.mnemonic}>Your mnemonic is {this.state.mnemonic}.</Text>
+                        <Text style={styles.warning}>
+                            Please save it, it won't be shown again and
+                            you will need it to recover your wallet
+                        </Text>
+                    </View>
+                }
             </MainWrapper>
         )
     }

@@ -5,6 +5,7 @@ import QRCodeScanner from './components/QRCodeScanner/QRCodeScanner'
 import CreateWalletScreen from './screens/createWallet/CreateWalletScreen'
 import ImportWalletScreen from './screens/importWallet/ImportWalletScreen'
 import LoginScreen from './screens/login/LoginScreen'
+import RecoverWalletScreen from './screens/recoverWallet/RecoverWalletScreen'
 // import ReceiveScreen from './screens/receive/ReceiveScreen'
 // import SendScreen from './screens/send/SendScreen'
 // import SettingsScreen from './screens/settings/SettingsScreen'
@@ -31,6 +32,9 @@ const RootNavigator = StackNavigator({
   },
   QRCodeScanner: {
     screen: QRCodeScanner
+  },
+  RecoverWallet: {
+    screen: RecoverWalletScreen
   }
 },
   { headerMode: 'none' }

@@ -32,6 +32,10 @@ export default class LoginScreen extends React.Component {
         this.props.navigation.navigate('CreateWallet')
     }
 
+    private recoverWallet = (): void => {
+        this.props.navigation.navigate('RecoverWallet')
+    }
+
     public render(): JSX.Element {
         return (
             <MainWrapper>
@@ -49,7 +53,7 @@ export default class LoginScreen extends React.Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={this.createWallet}
+                    onPress={this.recoverWallet}
                 >
                     <Text style={styles.buttonText}>Recover Wallet</Text>
                 </TouchableOpacity>
