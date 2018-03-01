@@ -1,3 +1,4 @@
+import ElectraJs from 'electra-js'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import MainWrapper from '../../components/MainWrapper/MainWrapper'
@@ -14,8 +15,9 @@ const styles = StyleSheet.create({
     },
     mnemonic: {
         textAlign: 'center',
-        color: 'white',
-        fontSize: 18
+        color: 'yellow',
+        fontSize: 18,
+        fontWeight: 'bold'
     },
     warning: {
         textAlign: 'center',
@@ -25,48 +27,44 @@ const styles = StyleSheet.create({
 })
 
 export interface State {
-    mnemonic: string,
-    promptVisible: boolean
+    mnemonic: string
 }
 
 export default class CreateWalletScreen extends React.Component<{}, State> {
     private hashMnemonic = (mnemonic: string): string =>
         CryptoJS.SHA256(mnemonic).toString(CryptoJS.enc.Hex)
 
+    private electraJS: ElectraJs
+
     public constructor(props: object) {
         super(props)
         this.state = {
-            promptVisible: true,
             mnemonic: ''
         }
+        this.electraJS = new ElectraJs()
     }
 
-    private submitMnemonic = (value: string) => {
-        this.setState({
-            promptVisible: false,
-            mnemonic: value
-        })
+    public componentDidMount(): void {
+        this.electraJS.wallet.generate()
+            .then(() => {
+                this.setState({ mnemonic: this.electraJS.wallet.MNEMONIC })
+            })
     }
 
     public render(): JSX.Element {
         return (
             <MainWrapper>
-                <Prompt
-                    title='Input a mnemonic'
-                    placeholder='Type here..'
-                    visible={this.state.promptVisible}
-                    onCancel={null}
-                    onSubmit={this.submitMnemonic}
-                />
-                {!!this.state.mnemonic &&
-                    <View style={styles.container}>
-                        <Text style={styles.mnemonic}>Your mnemonic is {this.state.mnemonic}.</Text>
-                        <Text style={styles.warning}>
-                            Please save it, it won't be shown again and
-                            you will need it to recover your wallet
-                        </Text>
-                    </View>
-                }
+                <View style={styles.container}>
+                    {!!this.state.mnemonic ?
+                        <View>
+                            <Text style={styles.warning}>
+                                Your wallet mnemonic is </Text>
+                            <Text style={styles.mnemonic}>{this.state.mnemonic}</Text>
+                            <Text style={styles.warning}>Please store it safely</Text>
+                        </View> :
+                        <Text style={styles.warning}>Generating Wallet</Text>
+                    }
+                </View>
             </MainWrapper>
         )
     }

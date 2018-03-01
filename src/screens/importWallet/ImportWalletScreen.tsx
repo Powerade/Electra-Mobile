@@ -28,10 +28,6 @@ export default class ImportWalletScreen extends React.Component {
         this.props.navigation.navigate('QRCodeScanner')
     }
 
-    private createMnemonic = (): void => {
-        this.props.navigation.navigate('CreateWallet')
-    }
-
     public render(): JSX.Element {
         return (
             <MainWrapper>
@@ -40,12 +36,6 @@ export default class ImportWalletScreen extends React.Component {
                     onPress={this.scanQRCode}
                 >
                     <Text style={styles.buttonText}>Scan QR Code</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={this.createMnemonic}
-                >
-                    <Text style={styles.buttonText}>Create Mnemonic</Text>
                 </TouchableOpacity>
             </MainWrapper>
         )
