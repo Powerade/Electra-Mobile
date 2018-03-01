@@ -7,10 +7,11 @@ import ImportWalletScreen from './screens/importWallet/ImportWalletScreen'
 import LocalEncryptionScreen from './screens/localEncryption/LocalEncryptionScreen'
 import LoginScreen from './screens/login/LoginScreen'
 import RecoverWalletScreen from './screens/recoverWallet/RecoverWalletScreen'
+import TransactionsListScreen from './screens/transactions/TransactionsListScreen'
+import WalletScreen from './screens/wallet/WalletScreen'
 // import ReceiveScreen from './screens/receive/ReceiveScreen'
 // import SendScreen from './screens/send/SendScreen'
 // import SettingsScreen from './screens/settings/SettingsScreen'
-// import WalletScreen from './screens/wallet/WalletScreen'
 
 // const tabNavigator = TabNavigator(
 //   {
@@ -39,6 +40,12 @@ const RootNavigator = StackNavigator({
   },
   LocalEncryption: {
     screen: LocalEncryptionScreen
+  },
+  Wallet: {
+    screen: WalletScreen
+  },
+  TransactionsList: {
+    screen: TransactionsListScreen
   }
 },
   { headerMode: 'none' }
