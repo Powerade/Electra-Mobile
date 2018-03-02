@@ -76,6 +76,14 @@ export default class WalletScreen extends React.Component<{}, State> {
     this.props.navigation.navigate('TransactionsList')
   }
 
+  private goToPayment = () => {
+    this.props.navigation.navigate('Send')
+  }
+
+  private goToReceive = () => {
+    this.props.navigation.navigate('Receive')
+  }
+
   // public componentDidMount() {
   // this.electraJs.webServices.getCurrentPriceIn(this.state.currency)
   //   .then((currentPrice: number) => this.setState({
@@ -118,6 +126,18 @@ export default class WalletScreen extends React.Component<{}, State> {
           onPress={this.goToTransactions}
         >
           <Text style={styles.buttonText}>Transactions List</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.goToPayment}
+        >
+          <Text style={styles.buttonText}>Payment Screen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.goToReceive}
+        >
+          <Text style={styles.buttonText}>Receive Coins</Text>
         </TouchableOpacity>
       </MainWrapper>
     )
